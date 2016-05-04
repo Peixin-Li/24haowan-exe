@@ -1,0 +1,11 @@
+添加联系信息：
+    ajax
+
+url: /ajax/addContactInfo
+dataType: json
+data: {
+    name:                    //姓名，字符串最大长度：100
+    phone:                   //联系方式，字符串最大长度：20
+    items1:                  //内容一，字符串最大长度：2000
+    items2:                  //内容二，字符串最大长度：3000
+}

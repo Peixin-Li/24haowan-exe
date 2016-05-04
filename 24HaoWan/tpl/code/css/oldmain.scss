@@ -1,0 +1,46 @@
+@import url(reset.css);
+
+$bgheight: 50px;
+.abstract {
+	height: 50px;
+	font-size: 16px;
+	padding: 5px 5px;
+}
+
+.played-game {
+	height: 200px;
+	position: relative;
+	span {
+			color: #fff;
+			font-size: 20px;
+	}
+	.data-box {
+		width: 100%;
+		height: $bgheight;
+		position: absolute;
+		bottom: 0;
+		.title {
+			position: absolute;
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+			        transform: translateY(-50%);
+			left: 12px;
+		}
+		.date {
+			position: absolute;
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+			        transform: translateY(-50%);
+			right: 12px;
+		}
+	}
+	.bg {
+		width: 100%;
+		height: $bgheight;
+		background-color: #000;
+		opacity: .5;
+		position: absolute;
+		bottom: 0;
+	}
+
+}

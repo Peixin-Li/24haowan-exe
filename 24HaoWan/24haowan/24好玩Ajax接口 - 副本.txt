@@ -1,0 +1,103 @@
+一、提交分数
+URL： /Ajax/CommitScore 
+传递参数： 
+    game_score      分数              int
+    game_id         游戏ID            int
+    badge           获得的徽章        int
+    device_type     设备型号          char(200)
+    role_id         玩家选择的角色ID  int
+    stage           关卡数            int
+
+返回值：
+{
+    'code': 0,
+    'msg' : 'ok'
+    'data': {
+        'rank' : 1,             //当前成绩的排名
+        'persent' : 90          //击败的百分比
+        'is_new_recode': 1      //是否是新记录（0,1）
+        'badge': 1              //当前游戏获得的徽章
+    }
+}
+
+其他返回值： -3：参数错误， -4：找不到该用户， -5：找不到该游戏
+
+二、提交分享
+分享链接时，需要在链接后面加上"?from_user=user_id", 这个user_id根据"Yii::app()->session['user_id']"来获取。
+
+URL： /Ajax/CommitShare
+传递参数： 
+    type      分享的类型              ['friend','cfriend']
+
+返回值：
+{
+    'code': 0,
+    'msg' : 'ok'
+}
+
+其他返回值： -3：参数错误， -4：找不到该用户， -5：找不到该游戏
+
+三、提交用户评论
+URL ： /ajax/SendComment
+传递参数： 
+    comment      评论
+    star         星级
+    game_id      游戏ID
+
+返回值：
+{
+    'code': 0,
+    'msg' : 'ok'
+}
+
+其他返回值： -3：参数错误, -5：找不到该游戏
+
+4、获取排名
+URL ： /ajax/GetRank
+传递参数：
+    game_id      游戏ID
+
+{
+    code: 0,
+    msg: "ok",
+    data: {
+        total_count: 2423                //玩家总数
+        rank_list: [                     //排名列表，成绩从高到低排列
+            {
+                name: "fdsf",           //玩家名
+                headimgurl: null,       //头像URL
+                score: "563"            //最高得分
+            },
+            {
+                name: "yhl",            
+                headimgurl: "http://wx.qlogoTI78/0",
+                score: "233"
+            }
+        ],
+        user_result: {                  //当前玩家信息
+            name: "yhl",                //玩家名
+            headimgurl: "http://xx",    //头像URL
+            score: "233",               //最高得分
+            rank: 2,                    //排名
+            persent: 50                 //当前玩家击败百分比
+        }
+    }
+}
+
+5、提交抽奖结果接口
+URL ： /ajax/SendLuckyGift
+传递参数：
+    num      抽中的物品ID
+
+提交成功的返回值:
+    {
+        'code':0,
+        'msg':'ok'
+    }
+
+其他返回值(code)说明：
+    -3:  num参数错误，
+    -4：找不到num对应的物品
+    -5：改物品已经发完
+    -6：用户没有关注公众号
+    -1：用户重复抽奖，或者其他错误

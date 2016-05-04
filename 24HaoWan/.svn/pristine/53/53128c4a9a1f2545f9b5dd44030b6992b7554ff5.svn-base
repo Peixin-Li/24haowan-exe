@@ -1,0 +1,34 @@
+页面返回参数：
+1、$signPackage
+
+2、openid  字符串(玩家的openid)
+
+3、game_id  数字  当前游戏的id
+
+
+【提交成绩的ajax接口】
+方式： POST
+URL: /ajax/commitScore
+参数：openid、game_socre、game_time、game_id
+
+返回值JSON: 
+{
+    'code': 0,
+    'msg' : 'ok'
+}
+
+
+【分享 ajax接口】
+方式： POST
+URL: /ajax/commitShare
+参数(类型都为字符串)：openid、type (tyep的可选值为：friend、cfriend)
+
+正确提交时的返回值JSON:
+{
+    'code': 0,
+    'msg' : 'ok'
+}
+
+其他返回值：code = -2:  type字段取值错误
+            code = -3:  openid为空
+            code = -4:  该openid对应的用户不存在

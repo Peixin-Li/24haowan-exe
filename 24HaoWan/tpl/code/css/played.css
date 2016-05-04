@@ -1,0 +1,58 @@
+@import url(reset.css);
+html, body {
+  height: 100%; }
+
+.played-game {
+  width: 100%;
+  overflow: hidden;
+  position: relative; }
+  .played-game .leftbox {
+    float: left;
+    width: 40%;
+    position: relative;
+    height: 130px; }
+    .played-game .leftbox p {
+      width: 80%;
+      height: 85px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      text-align: center; }
+      .played-game .leftbox p img {
+        width: 100%;
+        max-height: 85px; }
+      .played-game .leftbox p span {
+        font-size: 13px;
+        color: #000;
+        font-weight: bold; }
+  .played-game .rightbox {
+    width: 50%;
+    height: 85px;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #000; }
+    .played-game .rightbox .max-score {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%); }
+    .played-game .rightbox .civil {
+      position: absolute;
+      bottom: 0; }
+    .played-game .rightbox .badge {
+      width: 25px;
+      position: absolute;
+      right: 3px;
+      bottom: 0; }
+      .played-game .rightbox .badge img {
+        width: 100%; }
+
+.section-odd {
+  background-color: #FFECEC; }
+
+/*# sourceMappingURL=played.css.map */

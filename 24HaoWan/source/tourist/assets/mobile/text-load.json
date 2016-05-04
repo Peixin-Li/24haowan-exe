@@ -1,0 +1,39 @@
+{"frames": [
+
+{
+	"filename": "pic-start.png",
+	"frame": {"x":2,"y":2,"w":828,"h":1344},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":828,"h":1344},
+	"sourceSize": {"w":828,"h":1344},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "progress-empty.png",
+	"frame": {"x":2,"y":1348,"w":640,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":60},
+	"sourceSize": {"w":640,"h":60},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "progress-fill.png",
+	"frame": {"x":2,"y":1410,"w":640,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":60},
+	"sourceSize": {"w":640,"h":60},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "text-load.png",
+	"format": "RGBA8888",
+	"size": {"w":832,"h":1472},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:61cfb1f2ee160a64e77dcdaf955d1cc4:1a75ea4f1a6821a0b051ccc5fc6f57bb:ea636107ec7aa3cee62766b1aa305c81$"
+}
+}

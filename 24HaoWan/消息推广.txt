@@ -1,0 +1,17 @@
+{
+    "action_name": "QR_LIMIT_SCENE", 
+    "action_info": {
+        "scene": {
+            "scene_id": 1
+        }
+    }
+}  
+
+Connection: keep-alive
+Date: Tue, 17 Nov 2015 03:41:54 GMT
+Content-Type: application/json; encoding=utf-8
+Content-Length: 165
+{
+    "ticket": "gQHB8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL05qcjdOMUhtempfMzVacjU1QmJuAAIEAqJKVgMEAAAAAA==", 
+    "url": "http://weixin.qq.com/q/Njr7N1Hmzj_35Zr55Bbn"
+}

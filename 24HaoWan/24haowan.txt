@@ -1,0 +1,45 @@
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxec2b6c9e4bc47af8&redirect_uri=http%3A%2F%2F24haowan.shanyougame.com%2Fmain%2Flogin%2Ffrom%2Fweibo%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxec2b6c9e4bc47af8&redirect_uri=http%3A%2F%2F24haowan.shanyougame.com%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
+AppSecret: d22a07c474e7bed7dbcee3eb3519b5eb
+AppID : wxec2b6c9e4bc47af8 
+
+access token  :  GW282Xptpkh25_BL91Ef_MFiDoJhVo9Y4qc3EeO8WKQJz1zRABISgBtdeyvVpBaK_XKtnRcOClJSVQcvhxy-UfWEGKC52v3OADa6uM4fgBsERYaACAQDK
+
+
+{  
+    "button": [ 
+        {
+            "type": "click", 
+            "name": "本期推荐", 
+            "key": "game_new"
+        }, 
+        {
+            "type": "view", 
+            "name": "过往游戏", 
+            "url": "http://24haowan.shanyougame.com/main/subjectInfo/subject_id/1"
+        }, 
+        {
+            "name": "24好玩", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "方块的故�?, 
+                    "url": "http://mp.weixin.qq.com/s?__biz=MzI1MDA3NDY1OQ==&mid=401109420&idx=1&sn=0842b3ebd4eb9510b3fb8eab7241cfc6#rd"
+                },
+                {
+                    "type": "view", 
+                    "name": "平台特色", 
+                    "url": "http://mp.weixin.qq.com/s?__biz=MzI1MDA3NDY1OQ==&mid=400758058&idx=1&sn=718e3048c4b590724835670d18aac40e#rd"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "关于我们", 
+                    "url": "http://mp.weixin.qq.com/s?__biz=MzI1MDA3NDY1OQ==&mid=400760937&idx=1&sn=631348d71b2d3ab20dc1c7158ecfe49c#rd"
+                }
+            ]
+        }
+    ]
+}

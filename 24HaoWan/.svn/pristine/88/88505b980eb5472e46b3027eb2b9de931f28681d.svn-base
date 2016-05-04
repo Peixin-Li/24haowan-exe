@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "more_game.png",
+	"frame": {"x":2,"y":2,"w":255,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":255,"h":120},
+	"sourceSize": {"w":255,"h":120},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "play_again.png",
+	"frame": {"x":773,"y":2,"w":253,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":253,"h":120},
+	"sourceSize": {"w":253,"h":120},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "rank_btn.png",
+	"frame": {"x":259,"y":2,"w":255,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":255,"h":120},
+	"sourceSize": {"w":255,"h":120},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "select_people.png",
+	"frame": {"x":516,"y":2,"w":255,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":255,"h":120},
+	"sourceSize": {"w":255,"h":120},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "start_game.png",
+	"frame": {"x":1028,"y":2,"w":253,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":253,"h":120},
+	"sourceSize": {"w":253,"h":120},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "button.png",
+	"format": "RGBA8888",
+	"size": {"w":1283,"h":124},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:6e02ac84ab39390ee816e5d9e338a89c:4005dc8d64a8ec1c55a751966508b4d5:c39245c3a59c1712d97d26c862b4cbc5$"
+}
+}

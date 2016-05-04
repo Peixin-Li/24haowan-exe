@@ -1,0 +1,202 @@
+.body {
+	overflow: hidden;
+	background: #222;
+	color:#cccccc;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+} 
+
+#game_div {
+	image-rendering: optimizeSpeed;
+	-webkit-interpolation-mode: nearest-neighbor;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+:-webkit-full-screen #game_div {width: 100%; height: 100%; } 
+.change {
+	position: absolute;
+	top: 50px;
+	background-color: #fff;
+	border:1px solid #ffba00;
+	color:#fff;
+	height: 250px;
+	text-align: center;
+	display: none;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	z-index: 90;
+}
+.change ol {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.change li {
+	display: inline-block;
+	margin-top: 20px;
+	width: 30%;
+	height: 60px;
+}
+.change li img {
+	width: 34px;
+	height: 34px;
+}
+.change .on img{
+	outline :2px solid red;
+}
+.change .select {
+	position: absolute;
+	bottom: 6px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+    background-color: #FB9494;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 22px;
+    font-family: "microsoft yahei";
+}
+#pauseButton {
+	top: 50%;
+	display: none;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	background-color: #000;
+	z-index: 90;
+	background:url(http://24haowan-cdn.shanyougame.com/CubeAdventure/squareImage/button/pause_menu.png) no-repeat center center;
+	background-size: cover;
+}
+#pauseButton .pauseTitle {
+	font-size: 14px;
+	text-align: center;
+	width: 100%;
+	color: #333;
+	margin-top: 8%;
+}
+#pauseButton .pausePic {
+	width: 60%;
+	height: 60%;
+	margin: 14% auto; 
+	display: block;
+}
+#pauseButton .btn1 {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background:url(http://24haowan-cdn.shanyougame.com/CubeAdventure/squareImage/button/goon.png) no-repeat center center;
+	background-size: cover;
+	right: 50px;
+	bottom: -25px;
+}
+#pauseButton .btn2 {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	background:url(http://24haowan-cdn.shanyougame.com/CubeAdventure/squareImage/button/exit.png) no-repeat center center;
+	background-size: cover;
+	left: 50px;
+	bottom: -25px;
+}
+.select_bg {
+	z-index: 80;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #000;
+	opacity: .8;
+	display: none;
+}
+#game_div {
+	z-index: 70;
+}
+
+.over_menu {
+	position: absolute;
+	z-index: 75;
+	width: 90px;
+	height: 180px;
+	left: 50%;
+	top: 60px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	display: none;
+}
+.over_menu .head_img {
+	width: 100%;
+	height: 80px;
+	position: absolute;
+	z-index: 74;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.over_menu .head_img img {
+	width: 100%;
+	height: 100%;
+}
+.over_menu .head_img .headimg {
+	position: absolute;
+}
+.over_menu .head_img .img_border {
+	position: absolute;
+}
+.over_menu .score_box {
+	z-index: 73;
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	width: 90%;
+	height: 100%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	background:url(http://24haowan-cdn.shanyougame.com/CubeAdventure/squareImage/mobile/over/over_background.png) no-repeat center center;
+	background-size: cover;
+}
+.center_box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	width: 80%;
+}
+.score_box p {
+	color: #FFFBFB;
+	width: 100%;
+	text-align: center;
+	margin:0;
+	font-size: 20px;
+}
+.score_box .score {
+	font-size: 40px;
+}
+.score_box .hr_3 {
+	height: 1px;
+	margin:5px 0;
+	background-color: #FFFBFB;
+}
+/*css for ipad*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+	.over_menu {
+		width: 180px;
+		height: 460px;
+	}
+	.over_menu .head_img {
+		height: 180px;
+	}
+	.score_box .score {
+		font-size: 80px;
+	}
+	.score_box p {
+		font-size: 34px;
+	}
+}

@@ -1,0 +1,52 @@
+平台游戏视窗分三层
+
+主界面一层，游戏界面一层，结束界面一层。
+
+组件可以分为：
+排行榜组件，遮罩组件，其他组件【根据游戏需要设置的引导组件等】
+
+结束界面有 
+class为play-again的标签，点击后会触发再来一次事件。
+再来一次事件绑定接口为
+setFunction(callback)，请在游戏逻辑内设置再玩一次的回调事件。
+更多游戏
+more-game
+排行榜接口
+
+提交分数接口 
+setGameScore(score,getBadge(score),resetShareText());//分数，徽章，分享文案
+请游戏界面内自行判断分数对应奖牌的规则，并在结束游戏后触发提交分数接口。
+
+
+隐藏24好玩平台开始界面，触发 
+hiddenImg()接口隐藏主界面
+
+游戏分享文案接口:
+每个游戏需要有：
+1、一个设置分享文案的接口
+function resetShareText() {
+    var obj = {
+            share:"关注微信公众帐号，即可解锁方块猫咪",
+            default:"躲开尖刺，快看你能坚持多久！",
+            title:"我坚持了{score}下,打败了全国{persent}%人，快来看看你有我这么持久吗？",
+            desc:"小方块被困在牢笼中，墙壁中不断出现尖刺，危险重重。帮助小方块避开尖刺，坚持到底。",
+            imgUrl:"http://24haowan-cdn.shanyougame.com/CubeAdventure/squareImage/sharePic.png",
+    };
+    return obj;
+}
+2、获取徽章的接口
+function getBadge(score) {
+    if(score>=21) {
+        return 1;
+    } else if(score>=16) {
+        return 2;
+    } else if(score>=9) {
+        return 3;
+    } else {
+        return 0;
+    }
+}
+传递给平台页面是：
+setGameScore(score,getBadge(score),resetShareText());
+
+

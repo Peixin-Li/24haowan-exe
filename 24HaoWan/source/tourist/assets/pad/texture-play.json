@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "bg-countDown.png",
+	"frame": {"x":2,"y":2052,"w":204,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":204,"h":204},
+	"sourceSize": {"w":204,"h":204}
+},
+{
+	"filename": "bg-start.png",
+	"frame": {"x":2,"y":2,"w":1408,"h":2048},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1408,"h":2048},
+	"sourceSize": {"w":1408,"h":2048}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "texture.png",
+	"format": "RGBA8888",
+	"size": {"w":1412,"h":2258},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a783bbbf209df0a1a9ceaf29004d554a:1/1$"
+}
+}

@@ -1,0 +1,42 @@
+.over-btn-container {
+	top: 60%;
+	width: 100%;
+	text-align: center;
+	left: 0%;
+	z-index: 68;
+	position: absolute;
+	display: none;
+}
+
+.over-btn-replay,
+.over-btn-rank,
+.over-btn-more {
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+}
+
+.over-btn-replay {
+	background: url('http://24haowan-cdn.shanyougame.com/platform/images/playagain.png') center;
+	background-size: cover;
+}
+
+.over-btn-more {
+	margin-right: 20px;
+	background: url('http://24haowan-cdn.shanyougame.com/platform/images/more.png') center;
+	background-size: cover;
+}
+
+.over-btn-rank {
+	background: url('http://24haowan-cdn.shanyougame.com/platform/images/rank.png') center;
+	background-size: cover;
+}
+
+/*css for ipad*/
+@media only screen and (min-device-width : 700px) and (max-device-width : 1024px)  {
+	.over-btn-replay, .over-btn-rank, .over-btn-more {
+		display: inline-block;
+		width: 160px;
+		height: 70px;
+	}
+}

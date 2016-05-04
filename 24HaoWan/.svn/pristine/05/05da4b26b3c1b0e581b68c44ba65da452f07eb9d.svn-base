@@ -1,0 +1,237 @@
+一、本期专题：
+页面URL： /main/SubjectInfo
+前端页面名称： subjectInfo
+传入参数： subject_id，示例 /main/SubjectInfo/subject_id/2, 如果subject_id为空，则返回最新专题
+
+后台返回的参数：
+$subject_info  专题信息  JSON数据，格式为:
+    {
+        'subject_id': 1,                    //专题ID
+        'subject_name': 'xxxx'              //专题 name
+        'subject_description': 'xxx'        //专题 描述 
+        'img': 'http://xxx'                 //本期专题图片
+        'total_game': 3                     //本期游戏总数
+        'create_time': 2015-10-12 00:0:00   //创建时间
+        'start_time': 2015-10-12 00:0:00    //开始时间
+        'end_time': 2015-10-12 00:0:00      //结束时间
+    }
+
+$game_list  游戏列表    JSON数据。格式为：
+    [
+        {
+            'game_id': 1                        //游戏ID
+            'game_name': 'dasd'                 //游戏名
+            'star': '★★★★'                  //游戏星级
+            'quantity': 2434                    //人气
+            'description': 'dasd'               //游戏简介
+            'subject_id':1                      //游戏主题ID
+            'img':'http://...'                  //游戏图片
+            'create_time': '2015-10-25 00:00:00'         //创建时间
+            'start_time':'10.28 周三'           //游戏上线时间
+            'comment_times':2434                //评论的次数
+            'last_score': 321                   //当前玩家上次游戏成绩
+            'score':453                         //当前玩家最高成绩
+            'rank':34                           //排名
+            'persent':89                        //击败的百分比
+            'url':'http://fsdfsdf'//游戏的url
+        }
+        .....
+    ]
+
+$game_wait_list  未上线游戏列表 JSON格式：
+    [
+        {
+            'game_id': 1                        //游戏ID
+            'game_name': 'dasd'                 //游戏名
+            'star': '★★★★'                  //游戏星级
+            'quantity': 2434                    //人气
+            'description': 'dasd'               //游戏简介
+            'subject_id':1                      //游戏主题ID
+            'img':'http://...'                  //游戏图片
+            'comment_times':2434                //评论的次数
+            'create_time': '2015-10-25 00:00:00'         //创建时间
+            'start_time':'10.28 周三'           //游戏上线时间
+            'last_score': 321                   //当前玩家上次游戏成绩
+            'score':453                         //当前玩家最高成绩
+            'rank':34                           //排名
+            'persent':89                        //击败的百分比
+            'game_url':'http://fsdfsdf'              //游戏的url
+        }
+        .....
+    ]
+
+二、过往专题
+页面URL： /main/Subject
+前端页面名称： subject
+
+后台返回的参数：
+$subject_list  专题信息  JSON数据，格式为:
+    {
+        'subject_id': 1,                    //专题ID
+        'subject_name': 'xxxx'              //专题 name
+        'subject_description': 'xxx'        //专题 描述 
+        'img': 'http://xxx'                 //本期专题图片
+        'total_game': 3                     //本期游戏总数
+        'create_time': 2015-10-12 00:0:00   //创建时间
+        'start_time':'10.28 周三'           //游戏上线时间
+        'end_time': 2015-10-12 00:0:00      //结束时间
+        'quantity':201                      //人气
+    }
+
+PS : 如果需要查看本专题下的游戏信息,可跳转至 /main/SubjectInfo/subject_id/2
+
+
+三、玩过的游戏
+页面URL： /main/HistoryGame
+前端页面名称： historyGame
+
+返回参数：
+$game_list   游戏列表    JSON数据。格式为：
+[
+    {
+        'game_id': 1                        //游戏ID
+        'game_name': 'dasd'                 //游戏名
+        'share_img': 'http://dasd'          //小图片
+        'rank':23                           //排名
+        'score':4325                        //最高分数
+        'game_url': 'http://dsad'           //游戏URL
+        'quantity': 2434                    //人气
+        'badge': 1                          //徽章
+    }
+]
+
+四、评论页面
+页面URL： /main/Comment
+前端页面名称： comment
+传入参数： game_id ，如果game_id为空，则不返回任何内容
+
+返回参数：
+$game_info  游戏信息 JSON格式：
+    {
+        'game_id': 1                        //游戏ID
+        'game_name': 'dasd'                 //游戏名
+        'star': '★★★★'                  //游戏星级
+        'quantity': 2434                    //人气
+        'description': 'dasd'               //游戏简介
+        'subject_id':1                      //游戏主题ID
+        'img':'http://...'                  //游戏图片
+        'share_img': 'http://df'            //分享图片
+        'comment_times':2434                //评论的次数
+        'create_time': '2015-10-25 00:00:00'         //创建时间
+        'start_time':'2015-10-25 00:00:00'           //游戏上线时间
+        'game_url':'http://fsdfsdf'              //游戏的url
+    }
+
+$comment_list 评论列表  JSON格式
+[
+    {
+        'user_id':1,                //玩家ＩＤ
+        'user_name':'ewf',          //姓名
+        'headimgurl':"http://dsad", //头像
+        'update_time':"2015....",   //最后更新时间
+        'star':"asda",              //评论星级
+        'comment':"dsadas"          //评论的内容
+    }
+]
+
+五、添加评论
+页面URL： /main/EditComment
+前端页面名称： editComment
+传入参数：  ，如果game_id为空，则不返回任何内容
+
+返回参数：
+$game_info  游戏信息 JSON格式：
+    {
+        'game_id': 1                        //游戏ID
+        'game_name': 'dasd'                 //游戏名
+        'star': '★★★★'                  //游戏星级
+        'quantity': 2434                    //人气
+        'description': 'dasd'               //游戏简介
+        'subject_id':1                      //游戏主题ID
+        'img':'http://...'                  //游戏图片
+        'share_img': 'http://df'            //分享图片
+        'comment_times':2434                //评论的次数
+        'create_time': '2015-10-25 00:00:00'         //创建时间
+        'start_time':'2015-10-25 00:00:00'           //游戏上线时间
+        'game_url':'http://fsdfsdf'              //游戏的url
+    }
+
+$comment_info 评论列表  JSON格式
+    {
+        'user_id':1,                //玩家ＩＤ
+        'game_id':2,                //游戏ID
+        'star':"sdasd",             //星级
+        'update_time':"2015....",   //最后更新时间
+        'star':"asda",              //评论星级
+        'comment':"dsadas"          //评论的内容
+    }
+
+六、游戏页面
+页面URL： /main/game
+前端页面名称： game + 游戏的id
+传入参数： game_id ，如果game_id为空，则不返回任何内容
+
+返回参数：
+$this->game_id     字符串  当前游戏ID
+$this->game_time   字符串  游戏开始时间
+$this->headimgurl  用户头像
+$this->badge       用户徽章
+$this->is_attention   用户是否已经关注该公众号('yes'/'no')
+
+$this->user_result   JSON    玩家排名信息，如果玩家最高分为0，或者玩家是第一次进入，则为空
+{
+    rank: 2,
+    persent: 50
+    score: 2225    //最高分数
+    role_id: 0     //玩家角色ID,默认为0
+    last_score:0   //上一次提交的成绩
+    stage: 1       //上一次次提交成绩的关卡数
+}
+
+$this->signPackage   PHP数组    微信JS参数
+{
+    "appId" => 'dasda',
+    "nonceStr" => 'dasda',
+    "timestamp" => 'dasda',
+    "signature" => 'dasda',
+}
+
+
+七、抽奖页面
+页面URL：/main/LuckyGift
+前端页面名称：lucky_gift
+返回参数：gift_list JSON数组  ：
+    [
+        '100',
+        '250',
+        '50',
+        ........
+    ]
+    user_gift 字符串，玩家抽中的奖品ID(0/1/2/3/4/)
+
+说明：
+    1、如果物品为空，则返回的gift_list中对应的物品数量小于或等于0；
+    2、如果玩家未关注公众号，gift_list、user_gift为空；
+    3、如果玩家已经抽过奖品，gift_list为空，user_gift不为空；
+
+
+
+专题图片 【420*260】
+游戏图片 【420*260】
+分享链接及游戏图片 【】 
+分享引导 【正方形】 
+兼容移动端  宽度小于414的图片状态
+
+
+
+游戏内setFunction(【再来一次的按钮事件】);
+var againFun;
+function setFunction(obj) {
+    againFun = obj || null;
+}
+
+最高分数接口
+max_score
+
+
+padding 6px 12px 

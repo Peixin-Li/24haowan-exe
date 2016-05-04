@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "ball.png",
+	"frame": {"x":282,"y":34,"w":53,"h":53},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":53,"h":53},
+	"sourceSize": {"w":56,"h":56},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "helpMe.png",
+	"frame": {"x":2,"y":2,"w":142,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":1,"w":142,"h":99},
+	"sourceSize": {"w":160,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "paddle.png",
+	"frame": {"x":146,"y":2,"w":227,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":227,"h":30},
+	"sourceSize": {"w":240,"h":30},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "prop.png",
+	"frame": {"x":146,"y":34,"w":66,"h":66},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":66,"h":66},
+	"sourceSize": {"w":68,"h":68},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "splitProp.png",
+	"frame": {"x":214,"y":34,"w":66,"h":66},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":66,"h":66},
+	"sourceSize": {"w":68,"h":68},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprite.png",
+	"format": "RGBA8888",
+	"size": {"w":375,"h":103},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8d38398de74c8b5cb028ba42e9fabdc4:3617f6e2ed841cf1fe36cb3264bf2be4:68d88b3cf7eafc9b5accfffdfb2fda91$"
+}
+}

@@ -1,0 +1,403 @@
+html,body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+	-webkit-touch-callout: none;
+}
+
+.start-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  z-index: 100;
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  background-image: url("http://24haowan-cdn.shanyougame.com/platform/images/logo-s.png");
+  background-repeat: no-repeat;
+  background-position: center 40%; 
+}
+@media screen and (min-width: 768px) {
+    .start-img .start-img {
+      background-image: url("http://24haowan-cdn.shanyougame.com/platform/images/logo.png"); 
+    }
+}
+.start-img .start-text {
+    color: #c41900;
+    position: absolute;
+    top: 70%;
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+}
+
+img {
+	pointer-events: none;
+}
+
+.page_1 {
+	width: 100%;
+	height: 100%;
+	background: url(http://24haowan-cdn.shanyougame.com/tourist/assets/page_1.png) no-repeat center center;
+	background-size: contain;
+}
+.page_2 {
+	width: 100%;
+	height: 100%;
+	background: url(http://24haowan-cdn.shanyougame.com/tourist/assets/page_2.png) no-repeat center center;
+	background-size: contain;
+}
+#tip {
+	position: absolute;
+	display: none;
+	bottom: 6px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	width: 10%;
+}
+
+#bear-over-box #top-text {
+	position: fixed;
+	background-color: #fa2934;
+	color:#fff;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+    line-height: 30px;
+	text-align: center;
+	font-size: 16px;
+	font-family: "Microsoft YaHei";
+}
+#bear-over-box #over-score {
+    position: absolute;
+    top: 146px;
+    left: 50%;
+    font-size: 30px;
+    font-family: "Microsoft YaHei";
+    margin: 0;
+}
+#tip img {
+	width: 100%;
+}
+.page_3 {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#bear-over-box {
+	z-index: 63;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+	background-color: rgba(0,0,0,.8);
+}
+#bear-over-box .show-box {
+	text-align: center;
+	width: 100%;
+}
+#bear-over-box .show-box img{
+	width: 260px;
+	display: block;
+	margin:0 auto;
+    margin-top: 30px;
+    
+}
+#bear-over-box .show-box .play-again,#bear-over-box .show-box .buy {
+	display: inline-block;
+	width: 30%;
+    margin: 0 12px;
+}
+#bear-over-box .show-box .play-again img,#bear-over-box .show-box .buy img {
+	width: 100%;
+}
+
+.game-div {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+.circle {
+	display:none;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	border: 5px solid #b22222;
+	box-sizing: border-box;
+	position: absolute;
+	z-index:61;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.start-button {
+	display:none;
+	width: 180px;
+	height: 70px;
+	border-radius:10px;
+	border: 2px solid #ddd;
+	position: absolute;
+	background: white;
+	z-index:61;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/button-start.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+    background-size: cover;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+.make-text {
+	position: absolute;
+    width: 100px;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+    right: 12px;
+    bottom: 2px;
+    color: #fa2934;
+    font-size: 18px;
+	
+}
+.pause-button {
+	display:none;
+	width:34px;
+	height:34px;
+	position: absolute;
+	z-index:61;
+	right:10px;
+	top:10px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/mobile/button-pause.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-div {
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	background:rgba(0,0,0,0.95);
+	z-index:62;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-container {
+    width: 220px;
+    height: 255px;
+	display:block;
+	position:relative;
+	z-index:2;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/bg-pause.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	top: -15px;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-head {
+	display:block;
+	width:120px;
+	height:120px;
+	margin:0 auto;
+	position:relative;
+	top:-70px;
+	z-index:3;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-text-container {
+	position: relative;
+	top: -120px;
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-text {
+	padding-left:10px;
+	color:#333;
+	font-size:16px;
+	width:80%;
+	line-height:30px;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.pause-button-container {
+	position:relative;
+	text-align:center;
+	z-index:3;
+	top: -160px;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.replay-button {
+	display: inline-block;
+	width:76px;
+	height:76px;
+	margin-right:30px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/button-replay.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.resume-button {
+	display: inline-block;
+	width:76px;
+	height:76px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/button-resume.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.rotate-div {
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	background:rgba(0,0,0,0.95);
+	z-index:999;
+	-webkit-box-align:center;
+	-webkit-box-pack:center;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+.rotate-img {
+	width: 200px;
+	height: 120px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/mobile/rotate.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	-moz-user-select: none;
+	 -ms-user-select: none;
+	     user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-action: none;
+	    touch-action: none;
+}
+
+/* CSS For iPad */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+#bear-over-box #over-score {
+	top: 274px;
+    left: 50%;
+    font-size: 60px;
+}
+#bear-over-box #top-text {
+	height: 50px;
+	line-height: 50px;
+	font-size: 30px;
+}
+#bear-over-box #top-text {
+	font-size: 26px;
+}
+#bear-over-box .show-box img{
+	width: 500px;
+	margin-top: 50px;
+}
+.rotate-img {
+	width: 419px;
+	height: 248px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/pad/rotate.png');
+}
+
+.circle {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+	border: 8px solid #b22222;
+}
+
+.pause-button {
+	width: 51px; 
+	height: 51px;
+	right: 15px;
+	top: 15px;
+	background-image: url('http://24haowan-cdn.shanyougame.com/tourist/assets/pad/button-pause.png');
+}
+
+.make-text {
+	font-size: 20px;
+}
+}

@@ -1,0 +1,353 @@
+<?php
+
+class Weixin extends CFormModel
+{
+    //微信推送的消息模板
+    private function getMsgTpl($type) {
+        $all_type = array(
+            'text' => "<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Content><![CDATA[%s]]></Content>
+                    </xml>",
+            'article' => "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[%s]]></MsgType>
+                <ArticleCount>%s</ArticleCount>
+                <Articles>
+                <item>
+                    <Title><![CDATA[%s]]></Title>
+                    <PicUrl><![CDATA[%s]]></PicUrl>
+                    <Url><![CDATA[%s]]></Url>
+                </item>
+                <item>
+                    <Title><![CDATA[%s]]></Title>
+                    <PicUrl><![CDATA[%s]]></PicUrl>
+                    <Url><![CDATA[%s]]></Url>
+                </item>
+                </Articles>
+            </xml>",
+            'article1' => "<xml>
+                <ToUserName><![CDATA[%s]]></ToUserName>
+                <FromUserName><![CDATA[%s]]></FromUserName>
+                <CreateTime>%s</CreateTime>
+                <MsgType><![CDATA[%s]]></MsgType>
+                <ArticleCount>%s</ArticleCount>
+                <Articles>
+                <item>
+                    <Title><![CDATA[%s]]></Title>
+                    <Description><![CDATA[%s]]></Description>
+                    <PicUrl><![CDATA[%s]]></PicUrl>
+                    <Url><![CDATA[%s]]></Url>
+                </item>
+                </Articles>
+            </xml>"
+        );
+        return $all_type[$type];
+    }
+
+    private function curl_get($url, $params=array())             //发送get请求
+    {   
+        $tmp_parmas_url = "";
+        if(!empty($params)) {
+            foreach ($params as $key => $value) {
+                if(!empty($value)){
+                    if(empty($tmp_parmas_url))
+                        $tmp_parmas_url = '?'. $key .'=' . urlencode($value);
+                    else
+                        $tmp_parmas_url .= '&'. $key .'=' . urlencode($value);
+                }
+            }
+        }
+        $s_ch = curl_init();
+        curl_setopt( $s_ch, CURLOPT_URL, $url.$tmp_parmas_url);
+        curl_setopt( $s_ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt( $s_ch, CURLOPT_CONNECTTIMEOUT, 5 );
+        curl_setopt( $s_ch, CURLOPT_TIMEOUT, 5 );
+        $data = curl_exec( $s_ch );
+
+        $httpcode = curl_getinfo( $s_ch, CURLINFO_HTTP_CODE );
+        curl_close( $s_ch );
+        // return $url.$tmp_parmas_url;
+        return ($httpcode >= 200 && $httpcode < 300) ? $data : false;
+    }
+
+    /*通过code换取网页授权access_token 返回值为PHP数组
+    {
+       "access_token":"ACCESS_TOKEN",   //网页授权接口调用凭证
+       "expires_in":7200,               //access_token接口调用凭证超时时间，单位（秒）
+       "refresh_token":"REFRESH_TOKEN", //用户刷新access_token
+       "openid":"OPENID",               //用户唯一标识
+       "scope":"SCOPE",                 //用户授权的作用域，使用逗号（,）分隔
+       "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
+    }    */
+	public static function getWebAccessToken($code="") {
+        if( !empty($code) ){
+            $params['appid'] = Yii::app()->params['appid'];
+            $params['secret'] = Yii::app()->params['appsecret'];
+            $params['code'] = $code;
+            $params['grant_type'] = "authorization_code";
+            $url = "https://api.weixin.qq.com/sns/oauth2/access_token";
+            $result = self::curl_get($url, $params);
+            if( !empty($result['access_token']) ) {
+                return CJSON::decode($result, true);
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+	}
+
+    /*拉取用户信息(需scope为 snsapi_userinfo)  返回值为PHP数组
+    {
+       "openid":" OPENID",      用户的唯一标识
+       " nickname": NICKNAME,   用户昵称
+       "sex":"1",               用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
+       "province":"PROVINCE"    用户个人资料填写的省份
+       "city":"CITY",           普通用户个人资料填写的城市
+       "country":"COUNTRY",     国家，如中国为CN
+        "headimgurl":           用户头像
+        "privilege":            用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）
+        "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL"
+    }
+    */
+    public static function getUserInfo($web_access_token="", $openid="", $lang="zh_CN"){
+        if( (!empty($web_access_token)) && (!empty($openid)) ) {
+            $params['access_token'] = $web_access_token;
+            $params['openid'] = $openid;
+            $params['lang'] = $lang;
+            $url = "https://api.weixin.qq.com/sns/userinfo";
+            $userinfo = self::curl_get($url, $params);
+            if(empty($result['errcode'])) {
+                return CJSON::decode($userinfo);
+            }
+            else 
+                return false;
+        }
+        else
+            return false;
+    }
+
+
+    //处理微信推送消息接口
+    public static function processText($postObj) {
+        $from_username = $postObj->FromUserName;
+        $to_username = $postObj->ToUserName;
+        $keyword = trim($postObj->Content);
+        $time = time();
+        if(!empty( $keyword )) {
+            $content_str = "";
+            $game_info = Game::model()->find("game_name like :t_name and start_time <= :t_this_time", 
+                array(':t_name'=>"%$keyword%", ':t_this_time'=>date("Y-m-d H:i:s"))
+            );
+            if( !empty($game_info) ) {
+                $msg_type = "news";
+                $article_count = "1";
+
+                $pic_url = $game_info['img'];
+                $url = $game_info['game_url'];
+                
+                $title = $game_info['game_name'];
+                $description = $game_info['description'];
+                $pic_tpl = self::getMsgTpl('article1');
+                $result_str = sprintf($pic_tpl, $from_username, $to_username, $time, $msg_type, $article_count,$title, $description, $pic_url,$url);
+            }
+            else {
+                $msg_type = "text";
+                $content_str = "你好，该游戏暂未上线，如果需要查游戏名，请直接输入名称";
+                $text_tpl = self::getMsgTpl('text');
+                $result_str = sprintf($text_tpl, $from_username, $to_username, $time, $msg_type, $content_str);
+            }
+            return $result_str;
+        }
+        else
+            return "Input something...";
+    }
+
+
+    //处理微信推送event接口
+    public static function processEvent($postObj) {
+        $from_username = $postObj->FromUserName;
+        $to_username = $postObj->ToUserName;
+        $event = $postObj->Event;
+        $time = time();
+        if($event == "subscribe") {
+            if(!$user_info = AttentionUser::model()->find('openid =:t_openid', array(':t_openid'=>$from_username))) {
+                $user_info = new AttentionUser;
+                $user_info['openid'] = $from_username;
+                $user_info->save();
+            }
+            if(isset($postObj->EventKey)&&($postObj->EventKey=="qrscene_1")) {  //微信带参数扫码入口
+                $result_str = self::getLuckyGiftRe($from_username, $to_username);
+            }
+            else {
+                $msg_type = "news";
+                $article_count = "2";
+                $title = "";
+                $pic_url = "";
+                $url = "";
+                $game_result = Game::model()->findAll(array(                                        //查找最新上线的游戏
+                    'condition' => 'start_time <= :t_this_time and subject_id != :t_subject',
+                    'params' => array(':t_this_time'=>date("Y-m-d H:i:s"), ':t_subject'=>0),
+                    'order' => 'start_time DESC',
+                    'limit' => 1,
+                ));
+                if( !empty($game_result) ) {
+                    $game_info = $game_result[0];
+                    $pic_url = $game_info['img'];
+                    $url = $game_info['game_url'];
+                    $title = '【本期推荐】'.$game_info['game_name'];
+                }
+
+                $title2 = "【关于我们】一支有追求的团队";
+                $pic_url2 = "https://mmbiz.qlogo.cn/mmbiz/9wVOpRibEu9ULvqibtxOTPeV2whKeRuNO8Oc8z7gicnfGOVUXm8uFRQOc2oFKRjqickpmSibtfFuPickVj4YbzeleJyA/0?wx_fmt=jpeg";
+                $url2 = "http://mp.weixin.qq.com/s?__biz=MzI1MDA3NDY1OQ==&mid=401483693&idx=2&sn=512d988de5ee02bfff9ffaa8557158d4#rd";
+                $pic_tpl = self::getMsgTpl('article');
+                $result_str = sprintf($pic_tpl, $from_username, $to_username, $time, $msg_type, $article_count,$title, $pic_url, $url, $title2, $pic_url2,$url2);
+            }
+        }
+        else if(($event == "SCAN")&&isset($postObj->EventKey)) { 
+            $result_str = self::getLuckyGiftRe($from_username, $to_username);
+        }
+        else if($event == "CLICK") {
+            $key = empty($postObj->EventKey) ? "" : $postObj->EventKey;
+            if($key == "game_new") {
+                $game_result = Game::model()->findAll(array(
+                    'condition' => 'start_time <= :t_this_time and subject_id != :t_subject',
+                    'params' => array(':t_this_time'=>date("Y-m-d H:i:s"), ':t_subject'=>0),
+                    'order' => 'start_time DESC',
+                    'limit' => 1,
+                ));
+                if( !empty($game_result) ) {
+                    $game_info = $game_result[0];
+                    $msg_type = "news";
+                    $article_count = "1";
+                    $pic_url = $game_info['img'];
+                    $url = $game_info['game_url'];
+                    $title = $game_info['game_name'];
+                    $description = $game_info['description'];
+                    $pic_tpl = self::getMsgTpl('article1');
+                    $result_str = sprintf($pic_tpl, $from_username, $to_username, $time, $msg_type, $article_count,$title, $description, $pic_url,$url);
+                }
+                else
+                    $result_str = "23124";
+            }
+            else {
+                $msg_type = "text";
+                $content_str = "敬请期待！".$key;
+                $text_tpl = self::getMsgTpl('text');
+                $result_str = sprintf($text_tpl, $from_username, $to_username, $time, $msg_type, $content_str);
+            }
+        }
+
+        else {
+            $msg_type = "text";
+            $content_str = "敬请期待！";
+            $text_tpl = self::getMsgTpl('text');
+            $result_str = sprintf($text_tpl, $from_username, $to_username, $time, $msg_type, $content_str);
+        }
+        
+        return $result_str;
+    }
+
+    public static function test() {
+        $textTpl = self::getMsgTpl('text');
+        $resultStr = sprintf($textTpl, "fromUsername", "toUsername", 32143, "msgType", "contentStr");
+        return $resultStr;
+    }
+
+    //带参数扫码处理
+    private function getLuckyGiftRe($from_username="", $to_username="") {
+        $time = time();
+        $msg_type = "news";
+        $article_count = "1";
+        $pic_url = "";
+        $url = "http://24haowan.shanyougame.com/main/luckygift";
+        $title = "欢迎关注24好玩平台";
+        $description = "请点击查看全文，进入抽奖界面";
+        $pic_tpl = self::getMsgTpl('article1');
+        $result_str = sprintf($pic_tpl, $from_username, $to_username, $time, $msg_type, $article_count,$title, $description, $pic_url,$url);
+        return $result_str;
+    }
+
+    public static function sendMsgToUser($openid="", $type="code") {
+        if($user_info = User::model()->find('openid=:t_openid', array(':t_openid'=>$openid)) ) {
+            if( !empty($type) ) {
+                $remark = "";
+                $access_token = Credential::getAccessToken();
+                $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$access_token;
+                if($type=="code") {
+                    $code_info = Code::model()->find('used=:t_used', array(':t_used'=>'no'));
+                    $remark = "请在口袋机战游戏内兑换游戏礼包";
+                }
+                else if ($type=="account") {
+                    $code_info = LuckyAccount::model()->find('used=:t_used', array(':t_used'=>'no'));
+                    $remark = "请根据此激活码联系口袋机战客服人员升级VIP账号";
+                }
+                
+                $data = array(
+                    "touser"=> $openid,
+                    "template_id"=>"B77aZHG-4oSIJuMir7q7e0WeGHeN9nvbp2HL6BxCmuk",
+                    "data" => array(
+                        'first' => array("value"=> "您已抽奖成功。您的：", "color"=> "#173177"),
+                        'keyword1' => array("value"=> $user_info['name'], "color"=> "#173177"),
+                        'keyword2' => array("value"=> $code_info['code'], "color"=> "#173177"),
+                        'remark' => array("value"=> $remark, "color"=> "#173177"),
+                    )
+                );
+                $data = CJSON::encode($data);
+                $ch = curl_init ();
+                curl_setopt ( $ch, CURLOPT_URL, $url);
+                curl_setopt ( $ch, CURLOPT_POST, 1 );
+                curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+                curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+                curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+                $return = curl_exec ( $ch );
+                curl_close ( $ch );
+                $code_info['used'] = 'yes';
+                $code_info->save();
+                return $data;
+            }
+        }
+    }
+
+    //将网站联系人信息推送到微信上
+    public static function sendContactMsgToUser($info) {
+        $openid_list = array(
+            'oIzS4wXF63E0y3tBeEQjTIzIiIGc','oIzS4wag9wCCY7cZIPql4mDZYFqk'
+        );
+        $access_token = Credential::getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$access_token;
+
+        foreach ($openid_list as $openid) {
+            $data = array(
+                "touser"=> $openid,
+                "template_id"=>"NP7IucSb_pmYUhINwFtoT2hi5z-pk9VK7M34Rt5FkyY",
+                "data" => array(
+                    'first' => array("value"=> "收到新的用户反馈", "color"=> "#173177"),
+                    'keyword1' => array("value"=> '24好玩', "color"=> "#173177"),
+                    'keyword2' => array("value"=> $info['name'], "color"=> "#173177"),
+                    'keyword3' => array("value"=> $info['phone'], "color"=> "#173177"),
+                    'keyword4' => array("value"=> $info['create_time'], "color"=> "#173177"),
+                    'keyword5' => array("value"=> $info['items1'], "color"=> "#173177"),
+                    'remark' => array("value"=> $info['items2'], "color"=> "#173177"),
+                )
+            );
+            $data = CJSON::encode($data);
+            $ch = curl_init ();
+            curl_setopt ( $ch, CURLOPT_URL, $url);
+            curl_setopt ( $ch, CURLOPT_POST, 1 );
+            curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+            curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+            $return = curl_exec ( $ch );
+            curl_close ( $ch );
+        }
+    }
+
+}

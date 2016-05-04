@@ -1,0 +1,8 @@
+source目录是用来存放静态资源的目录，这些静态资源包括：js、css、image
+
+SVN提交之后，文件的URL链接格式为：
+http://24haowan-cdn.shanyougame.com/ + source下的文件名(包含路径，但是不包含source本身)
+
+例如 source/public/js/zepto.js 的链接地址为：
+http://24haowan-cdn.shanyougame.com/public/js/zepto.js
+
